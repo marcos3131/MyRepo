@@ -1,0 +1,5 @@
+P:\FTP(Public)\kb\WPR\Wyklady\W5\progs\Author.java
+P:\FTP(Public)\kb\WPR\Wyklady\W5\progs\SpaceToWrite.java
+P:\FTP(Public)\kb\WPR\Wyklady\W5\progs\PipesTest.java
+P:\FTP(Public)\kb\WPR\Wyklady\W5\progs\Duplicator.java
+P:\FTP(Public)\kb\WPR\Wyklady\W5\progs\TxtWriter.java

@@ -1,0 +1,4 @@
+file DictionaryTest
+set args -d dict.txt -e restrictedWords.txt -o output.cpp main.cpp Restricted.cpp
+b Obscurator::obscure
+b Obscurator::tokenize

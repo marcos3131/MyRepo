@@ -17,4 +17,12 @@ class CapitalsNoJFC {
 			JOptionPane.showMessageDialog(null, "Kraj: " + in + " Stolica: " + cap);
 		}
 	}
+	
+	public void readInfo() {
+		
+	}
+	
+	public String getCapital(String s) {
+		return "";
+	}
 }

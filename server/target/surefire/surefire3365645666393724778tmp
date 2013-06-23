@@ -1,0 +1,5 @@
+#surefire
+#Sun Jun 23 16:45:22 CEST 2013
+user.dir=/home/mark/eclipse_workspaces/workspace1/MyRepo/Bank/server
+localRepository=/home/mark/.m2/repository
+basedir=/home/mark/eclipse_workspaces/workspace1/MyRepo/Bank/server

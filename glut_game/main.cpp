@@ -38,7 +38,7 @@ void ReSizeGLScene(int Width, int Height)
 /* The main drawing function. */
 void DrawGLScene()
 {
-glutSetWindow(window);                                        //Set active window
+  glutSetWindow(window);                                        //Set active window
 
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);        // Clear The Screen And The Depth Buffer
   glLoadIdentity();                                // Reset The View

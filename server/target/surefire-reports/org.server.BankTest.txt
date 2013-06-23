@@ -1,0 +1,52 @@
+-------------------------------------------------------------------------------
+Test set: org.server.BankTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 12, Errors: 0, Skipped: 0, Time elapsed: 0.117 sec <<< FAILURE!
+org.server.BankTest.testCreateAccount1()  Time elapsed: 0.009 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testCreateAccount1(BankTest.java:16)
+
+org.server.BankTest.testFindAccount1()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testFindAccount1(BankTest.java:23)
+
+org.server.BankTest.testFindAccount2()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testFindAccount2(BankTest.java:30)
+
+org.server.BankTest.testDeposit1()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testDeposit1(BankTest.java:36)
+
+org.server.BankTest.testDeposit2()  Time elapsed: 0.017 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testDeposit2(BankTest.java:44)
+
+org.server.BankTest.testWithdraw1()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testWithdraw1(BankTest.java:55)
+
+org.server.BankTest.testWithdraw2()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testWithdraw2(BankTest.java:63)
+
+org.server.BankTest.testTransfer1()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testTransfer1(BankTest.java:70)
+
+org.server.BankTest.testTransfer2()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testTransfer2(BankTest.java:76)
+
+org.server.BankTest.testTransfer3()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testTransfer3(BankTest.java:82)
+
+org.server.BankTest.testTransfer4()  Time elapsed: 0.004 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testTransfer4(BankTest.java:89)
+
+org.server.BankTest.testTransfer5()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at org.server.BankTest.testTransfer5(BankTest.java:96)
+

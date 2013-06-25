@@ -60,7 +60,7 @@ class KMap extends JFrame {
 	JLabel createLabel(String txt, String key) {
 		JLabel l = new JLabel(txt + " ");
 		l.setPreferredSize(new Dimension(100, 500));
-		l.setToolTipText("Wciœnij : ");
+		l.setToolTipText("Wciï¿½nij : ");
 		InputMap imap = l.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		imap.put(KeyStroke.getKeyStroke(key), "write");
 		l.setActionMap(amap);

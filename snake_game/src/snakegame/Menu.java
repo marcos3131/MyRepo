@@ -8,6 +8,16 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -32,6 +42,7 @@ class Menu extends JPanel {
     Dimension mWindowDimension;
     // events
     ClickableButton mPlayButton;
+	private _<String> mPlayerName;
 
     public Menu(JFrame j, Scoreboard sb, GameState gs,
             Dimension windowDimension) {
@@ -46,8 +57,32 @@ class Menu extends JPanel {
         this.mScoreboard = sb;
         this.mGameState = gs;
         this.mWindowDimension = windowDimension;
+        this.mPlayerName = new _<String>("Unnamed");
         mfcp = (JPanel) mJFrame.getContentPane();
+        readPlayerName();
         initComponents();
+    }
+    
+    private void readPlayerName() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("PlayerName.txt"));
+
+            mPlayerName.s(br.readLine());
+            br.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+    
+    private void writePlayerName() {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("PlayerName.txt"));
+
+            bw.write(mPlayerName.g());
+            bw.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
 
@@ -154,7 +189,7 @@ class Menu extends JPanel {
                     mJFrame.remove(this);
 
                     Play play = new Play(mJFrame, mScoreboard,
-                            mGameState, mWindowDimension);
+                            mGameState, mWindowDimension, mPlayerName);
 
                     play.go();
 
@@ -179,7 +214,7 @@ class Menu extends JPanel {
                     mGameState.menu = false;
                     mJFrame.remove(this);
                     
-                    ChangeNamePanel cnp = new ChangeNamePanel((JPanel)mJFrame.getContentPane());
+                    ChangeNamePanel cnp = new ChangeNamePanel((JPanel)mJFrame.getContentPane(), mPlayerName);
                     cnp.activate();
 
                     mJFrame.add(this);
@@ -190,44 +225,12 @@ class Menu extends JPanel {
                 } else if (mButtonsClickedList.contains("exit")) {
                     mButtonsClickedList.clear();
                     mScoreboard.writeRecords();
+                    writePlayerName();
                     System.exit(0);
                 }
                 mButtonsClickedList.clear();
             }
         }
-    }
-
-    private void showChangeNamePanel(JFrame f) {
-        backToMenu = false;
-
-        JPanel p = new JPanel();
-
-        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-
-        JButton backButton = new JButton("Back");
-        backButton.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                backToMenu = true;
-            }
-        });
-
-        backButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        backButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-
-        // add to JPanel
-        p.add(Box.createGlue());
-        p.add(backButton);
-        // add to JFrame
-        f.add(p);
-        f.show();
-
-        // w8 for click on backButton...
-        while (backToMenu == false);
-
-        backToMenu = false;
-        f.remove(p);
     }
 
     public void paintComponent(Graphics g) {

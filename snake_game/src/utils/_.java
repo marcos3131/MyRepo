@@ -6,8 +6,18 @@ public class _<E> {
     public _( E e ){
         ref = e;
     }
-    public E g() { return ref; }
-    public void s( E e ){ this.ref = e; }
+    
+    public E g() {
+    	synchronized (ref) {
+    		return ref;
+    	}
+    }
+    
+    public void s( E e ) {
+    	synchronized (ref) {
+    		this.ref = e;
+    		}
+    	}
 
     @Override
     public String toString() {

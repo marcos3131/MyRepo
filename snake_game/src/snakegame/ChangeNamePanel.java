@@ -1,45 +1,71 @@
 package snakegame;
 
-import utils._;
-import java.awt.event.MouseEvent;
-
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+
+import utils._;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ChangeNamePanel extends JPanel {
+	
+	JPanel fcp;
     _<Boolean> mBackButtonClicked;
-    JPanel fcp;
+    _<String> mPlayerName;
+    private JTextField txtTypeNameHere;
 
-    /** Creates new form ScoreboardPanel4 */
-    public ChangeNamePanel(JPanel p) {
-        mBackButtonClicked = new _<Boolean>(false);
-        this.fcp = p;
-        initComponents();
-        fcp.repaint();
-    }
-
-    private void initComponents() {
-    }// </editor-fold>
-
-    public void jButton1MouseClicked(MouseEvent e) {
-        mBackButtonClicked.s(true);
-    }
-
-    // Variables declaration - do not modify
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jButton1;
-    // End of variables declaration
+	/**
+	 * Create the panel.
+	 */
+	public ChangeNamePanel(JPanel _fcp, _<String> pname) {
+		fcp = _fcp;
+		mPlayerName = pname;
+		mBackButtonClicked = new _<Boolean>(false);
+		mBackButtonClicked.s(false);
+		
+		fcp.add(this, BorderLayout.CENTER);
+		this.setAlignmentX(CENTER_ALIGNMENT);
+		this.setAlignmentY(CENTER_ALIGNMENT);
+		setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Name:");
+		lblNewLabel.setBounds(195, 136, 56, 17);
+		add(lblNewLabel);
+		
+		txtTypeNameHere = new JTextField();
+		txtTypeNameHere.setText("Type name here");
+		txtTypeNameHere.setBounds(269, 134, 114, 19);
+		add(txtTypeNameHere);
+		txtTypeNameHere.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+		        mBackButtonClicked.s(true);
+		        if (txtTypeNameHere.getText() != null)
+		        	mPlayerName.s(txtTypeNameHere.getText());
+			}
+		});
+		btnNewButton.setBounds(423, 361, 117, 25);
+		add(btnNewButton);
+		fcp.revalidate();
+	}
 
     @SuppressWarnings("empty-statement")
     public void activate() {
-        fcp.show(); // not needed
-        fcp.repaint();
+        fcp.show();
+        //fcp.repaint();
 
         // w8 for click on backButton...
         while (mBackButtonClicked.g() == false)
-            ;
+    		;
+        
         fcp.remove(this);
         fcp.repaint();
-        //fcp.show();
+        fcp.show();
     }
-
 }

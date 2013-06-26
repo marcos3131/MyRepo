@@ -138,6 +138,7 @@ public class Scoreboard {
         // w8 for click on backButton...
         while (backToMenu.g() == false)
             ;
+        
         f.remove(sp);
         f.repaint();
         f.show();

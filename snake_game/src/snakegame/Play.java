@@ -1,6 +1,8 @@
 package snakegame;
 
 import utils.SnakeWindowAdapter;
+import utils._;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -34,7 +36,7 @@ class Play extends JPanel implements KeyListener {
     // utils
     Random generator = new Random();
     // player
-    String mPlayerName;
+    _<String> mPlayerName;
     // game
     // *objects on map
     // **snake
@@ -47,7 +49,7 @@ class Play extends JPanel implements KeyListener {
     int points;
 
     public Play(JFrame j, Scoreboard sb, GameState gs,
-            Dimension windowDimension) {
+            Dimension windowDimension, _<String> pname) {
         // init
         // *variables
         this.mJFrame = j;
@@ -65,7 +67,7 @@ class Play extends JPanel implements KeyListener {
         //mJFrame.add(this);
 
         // player
-        mPlayerName = "Unnamed";
+        mPlayerName = pname;
 
         // game
         snake = new LinkedList<Point>();
@@ -116,7 +118,7 @@ class Play extends JPanel implements KeyListener {
     }
 
     void endGame() {
-        mScoreboard.addRecord(mPlayerName, points);
+        mScoreboard.addRecord(mPlayerName.g(), points);
     }
 
     private void gameLoop() {
@@ -295,9 +297,11 @@ class Play extends JPanel implements KeyListener {
         // *close operation
         lJFrame.addWindowListener(
                 new SnakeWindowAdapter(lScoreboard));
-
+        
+        _<String> pname = new _<String>("Unnamed");
+        
         Play f = new Play(lJFrame, new Scoreboard(),
-                new GameState(), lWindowDimension);
+                new GameState(), lWindowDimension, pname);
 
         f.go();
     }

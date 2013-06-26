@@ -32,6 +32,7 @@ public class ScoreboardPanel extends javax.swing.JPanel {
         this.fcp = p;
         this.records = records;
         initComponents();
+        fcp.add(this);
     }
     
     private void initComponents() {
@@ -84,7 +85,6 @@ public class ScoreboardPanel extends javax.swing.JPanel {
         fcp.setLayout(new BorderLayout());
         fcp.setBorder(BorderFactory.createEmptyBorder(
                 75, 75, 75, 75));
-        fcp.add(this);
     }// </editor-fold>
 
     public void jButton1MouseClicked(MouseEvent e) {

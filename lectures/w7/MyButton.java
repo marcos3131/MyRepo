@@ -13,7 +13,7 @@ class MyButton extends JButton {
 		int h = getHeight();			// i wysokosc komponentu
 		g.setColor(Color.red);			// ustalenie koloru rysenku
 		// rysowanie kwadracikow
-		g.fillRect(0, 0, 10, 10,);
+		g.fillRect(0, 0, 10, 10);
 		g.fillRect(w-10, 0, 10, 10);
 		g.fillRect(0, h-10, 10, 10);
 		g.fillRect(w-10, h-10, 10, 10);
@@ -23,10 +23,19 @@ class MyButton extends JButton {
 class MyButtonTest extends JFrame {
 	Container cp = getContentPane();
 	
-	public MyButtonTent() {
+	public void MyButtonTest() {
 		MyButton mb = new MyButton("To jest przycisk");
 		cp.add(mb);
-		pack();
-		show();
+		setVisible(true);
+	}
+	
+	public static void main(String argv[]) {
+		MyButtonTest mbt = new MyButtonTest();
+		
+		JFrame jf = new JFrame();
+		jf.setVisible(true);
+		jf.add(new MyButton("asdf"));
+		jf.pack();
+		jf.show();
 	}
 }

@@ -1,6 +1,7 @@
 package com.brackeen.javagamebook.test;
 
 import java.awt.*;
+
 import javax.swing.ImageIcon;
 
 import com.brackeen.javagamebook.graphics.ScreenManager;
@@ -115,4 +116,15 @@ public abstract class GameCore {
         method.
     */
     public abstract void draw(Graphics2D g);
+    
+    public static void main(String args[]) {
+    	GameCore gc = new GameCore() {
+			
+			@Override
+			public void draw(Graphics2D g) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+    }
 }

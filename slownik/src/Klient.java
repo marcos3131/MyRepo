@@ -7,138 +7,137 @@ import javax.swing.*;
 
 public class Klient {
 
-public static void main(String[] args) {
-OknoKlient okno = new OknoKlient();
-okno.setSize(300,200);
-okno.setTitle("Okno klienta.");
-okno.setVisible(true);
-okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-}
-}
-
-class OknoKlient extends JFrame implements ActionListener{
-JTextField pole1=null, pole2=null;
-Socket polaczenie = null;
-InputStream we=null;
-OutputStream wy=null;
-Watek1 w1=null;
-Watek2 w2=null;
-
-public OknoKlient() {
-setLayout(new FlowLayout());
-JLabel lab1=new JLabel("Wpisz polskie s³owo do przet³umaczenia:");
-add(lab1);
-pole1 =new JTextField(20);
-add(pole1);
-
-JButton przycisk1=new JButton("wyczyœæ");
-przycisk1.addActionListener(this);
-add(przycisk1);
-
-JButton przycisk2=new JButton("przet³umacz");
-przycisk2.addActionListener(this);
-add(przycisk2);
-
-JButton przycisk3=new JButton("koniec");
-przycisk3.addActionListener(this);
-add(przycisk3);
-
-JLabel lab2=new JLabel("S³owo w jêzyku angielskim:");
-add(lab2);
-pole2 =new JTextField(20);
-add(pole2);
-
-try{
-    polaczenie= new Socket("localhost", 8866);
-    } catch(Exception e){  }
-/* koniec konstruktora: */
+	public static void main(String[] args) {
+		OknoKlient okno = new OknoKlient();
+		okno.setSize(300, 200);
+		okno.setTitle("Okno klienta.");
+		okno.setVisible(true);
+		okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 }
 
-public void actionPerformed(ActionEvent ev) {
+class OknoKlient extends JFrame implements ActionListener {
+	JTextField pole1 = null, pole2 = null;
+	Socket polaczenie = null;
+	InputStream we = null;
+	OutputStream wy = null;
+	Watek1 w1 = null;
+	Watek2 w2 = null;
 
-if(ev.getActionCommand()=="wyczyœæ") {
-      pole1.setText("");
-      pole2.setText("");
-    }
+	public OknoKlient() {
+		setLayout(new FlowLayout());
+		JLabel lab1 = new JLabel("Wpisz polskie sï¿½owo do przetï¿½umaczenia:");
+		add(lab1);
+		pole1 = new JTextField(20);
+		add(pole1);
 
-if(ev.getActionCommand()=="przet³umacz") {
-      w2=new Watek2(polaczenie,wy);
-      w2.start();
-    }
-if(ev.getActionCommand()=="koniec") {
-      w1=new Watek1(polaczenie,wy);
-      w1.start();
-    }
-}
+		JButton przycisk1 = new JButton("wyczyï¿½ï¿½");
+		przycisk1.addActionListener(this);
+		add(przycisk1);
 
-class Watek1 extends Thread {
-Socket polaczenie;
-OutputStream wy;
-DataOutputStream zapis = null;
-InputStream we;
-BufferedReader odczyt = null;
+		JButton przycisk2 = new JButton("przetï¿½umacz");
+		przycisk2.addActionListener(this);
+		add(przycisk2);
 
-public Watek1(Socket polaczenie,OutputStream wy)
-    {
-     this.polaczenie=polaczenie;
-    this.wy=wy;
-    }
+		JButton przycisk3 = new JButton("koniec");
+		przycisk3.addActionListener(this);
+		add(przycisk3);
 
-public void run() {
-            try{
-                wy=polaczenie.getOutputStream();
-                zapis = new DataOutputStream(wy);
-                zapis.writeBytes("koniec");
-                                        polaczenie.close();
-                                        System.exit(0);
-                                      }  catch(Exception e){ }
+		JLabel lab2 = new JLabel("Sï¿½owo w jï¿½zyku angielskim:");
+		add(lab2);
+		pole2 = new JTextField(20);
+		add(pole2);
 
+		try {
+			polaczenie = new Socket("localhost", 8866);
+		} catch (Exception e) {
+		}
+		/* koniec konstruktora: */
+	}
 
-/* koniec metody run():   */
-}
+	public void actionPerformed(ActionEvent ev) {
 
-/* koniec klasy wew: */
-}
+		if (ev.getActionCommand() == "wyczyï¿½ï¿½") {
+			pole1.setText("");
+			pole2.setText("");
+		}
 
-class Watek2 extends Thread {
-Socket polaczenie;
-OutputStream wy;
-DataOutputStream zapis = null;
-InputStream we;
-BufferedReader odczyt = null;
+		if (ev.getActionCommand() == "przetï¿½umacz") {
+			w2 = new Watek2(polaczenie, wy);
+			w2.start();
+		}
+		if (ev.getActionCommand() == "koniec") {
+			w1 = new Watek1(polaczenie, wy);
+			w1.start();
+		}
+	}
 
-public Watek2(Socket polaczenie,OutputStream wy)
-    {
-       this.polaczenie=polaczenie;
-       this.wy=wy;
-    }
+	class Watek1 extends Thread {
+		Socket polaczenie;
+		OutputStream wy;
+		DataOutputStream zapis = null;
+		InputStream we;
+		BufferedReader odczyt = null;
 
-public void run() {
-            try{
-                            wy=polaczenie.getOutputStream();
-                            String slowoPL=pole1.getText();
+		public Watek1(Socket polaczenie, OutputStream wy) {
+			this.polaczenie = polaczenie;
+			this.wy = wy;
+		}
 
-                if( slowoPL!=null && !(slowoPL.equals("")) ) {
-                zapis = new DataOutputStream(wy);
-                zapis.writeBytes(slowoPL + "\n");
-                
-                we=polaczenie.getInputStream();
-                odczyt= new BufferedReader (new InputStreamReader(we));
-                String slowoEN=odczyt.readLine();
+		public void run() {
+			try {
+				wy = polaczenie.getOutputStream();
+				zapis = new DataOutputStream(wy);
+				zapis.writeBytes("koniec");
+				polaczenie.close();
+				System.exit(0);
+			} catch (Exception e) {
+			}
 
-                            if (slowoEN!=null && !(slowoEN.equals("")) )  {
-                            pole2.setText(slowoEN);
-                                               }
-                            else if (slowoEN==null && !(slowoEN.equals("")) )  {
-                            pole2.setText("");
-                                               }
-                                                 }
+			/* koniec metody run(): */
+		}
 
-             }  catch(Exception e){ }
+		/* koniec klasy wew: */
+	}
 
-/* koniec metody run():   */
-}
-/* koniec klasy wew: */
-}
-/* koniec klasy Oknopolaczenie: */
+	class Watek2 extends Thread {
+		Socket polaczenie;
+		OutputStream wy;
+		DataOutputStream zapis = null;
+		InputStream we;
+		BufferedReader odczyt = null;
+
+		public Watek2(Socket polaczenie, OutputStream wy) {
+			this.polaczenie = polaczenie;
+			this.wy = wy;
+		}
+
+		public void run() {
+			try {
+				wy = polaczenie.getOutputStream();
+				String slowoPL = pole1.getText();
+
+				if (slowoPL != null && !(slowoPL.equals(""))) {
+					zapis = new DataOutputStream(wy);
+					zapis.writeBytes(slowoPL + "\n");
+
+					we = polaczenie.getInputStream();
+					odczyt = new BufferedReader(new InputStreamReader(we));
+					String slowoEN = odczyt.readLine();
+
+					if (slowoEN != null && !(slowoEN.equals(""))) {
+						pole2.setText(slowoEN);
+					} else if (slowoEN == null && !(slowoEN.equals(""))) {
+						pole2.setText("");
+					}
+				}
+
+			} catch (Exception e) {
+			}
+
+			/* koniec metody run(): */
+		}
+		/* koniec klasy wew: */
+	}
+	/* koniec klasy Oknopolaczenie: */
 }
